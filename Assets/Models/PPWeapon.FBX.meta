@@ -6,12 +6,17 @@ ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Weapon
     400000: //RootNode
+    400002: Weapon
     2300000: //RootNode
+    2300002: Weapon
     3300000: //RootNode
+    3300002: Weapon
     4300000: Weapon
     7400000: Shoot
     7400002: Reload
+    7400004: Take 001
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -39,7 +44,7 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 0
       lastFrame: 5
-      wrapMode: 8
+      wrapMode: 1
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
@@ -66,6 +71,34 @@ ModelImporter:
       name: Reload
       takeName: Take 001
       firstFrame: 5
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
       lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
