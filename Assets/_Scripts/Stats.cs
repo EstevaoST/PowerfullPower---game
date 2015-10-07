@@ -23,6 +23,7 @@ public class Stats {
         recoil
     }
 
+
     public float speed; // V
     public float size; // S
     public float gravity; // G
@@ -80,6 +81,22 @@ public class Stats {
             case StatsName.recoil: return 'F'; // what ???
         }
         return '?';
+    }
+    public static float GetStatValue(StatsName s, int level)
+    {
+        switch (s)
+        {
+            case StatsName.speed: return 100 * level;
+            case StatsName.size: return 5 + 2 * level;
+            case StatsName.gravity: return 0.3f * level;
+            case StatsName.damage: return 1 + 3 * level;
+            case StatsName.knockback: return 100 * level;
+            case StatsName.cooldown: return Mathf.Lerp(2, 0.1f, level / 10.0f);
+            case StatsName.rebound: return level - 1;
+            case StatsName.explosion: return 10 * level;
+            case StatsName.recoil: return 100 * level; // what ???
+        }
+        return 0;
     }
 
     internal void Add(StatsEntry item)
