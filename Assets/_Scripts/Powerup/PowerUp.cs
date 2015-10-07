@@ -11,8 +11,8 @@ public class PowerUp : MonoBehaviour {
     
     void RandomizeStats()
     {
-        float goodValue = 6;
-        float badValue = 4;
+        int goodValue = 6;
+        int badValue = 4;
 
         int goodN = UnityEngine.Random.Range(1, 3); // random fom 1 to 2;
         int badN = UnityEngine.Random.Range(1, 4); // random from 1 to 3

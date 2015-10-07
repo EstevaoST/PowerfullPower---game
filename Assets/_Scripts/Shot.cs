@@ -8,7 +8,9 @@ public class Shot : MonoBehaviour {
     public float knockback; //
     public int   rebound; //
     public float explosion;
+    
     public LayerMask raycastMask;
+    public Explosion explosionPrefab;
 
     private Rigidbody rb;
     RaycastHit rh = new RaycastHit();
@@ -27,7 +29,7 @@ public class Shot : MonoBehaviour {
 
         transform.LookAt(transform.position + rb.velocity, transform.up);
 
-        if (Physics.Raycast(new Ray(transform.position, rb.velocity), out rh, transform.localScale.z * (1 + Time.fixedDeltaTime), raycastMask.value))
+        if (Physics.Raycast(new Ray(transform.position, rb.velocity), out rh, transform.localScale.z * 2 + (rb.velocity.magnitude) * Time.fixedDeltaTime, raycastMask.value))
         {
 
             Debug.DrawRay(rh.point, rh.normal * 10, Color.yellow, 3);
@@ -47,7 +49,7 @@ public class Shot : MonoBehaviour {
         if (rebound-- <= 0)
             Destroy(gameObject);
 
-        if (explosion <= 0)
+        if (explosion  <= 0)
         {
             GameCharacter gc = collider.GetComponent<GameCharacter>();
             if (gc != null)
@@ -57,7 +59,10 @@ public class Shot : MonoBehaviour {
         }
         else
         {
-
+            Explosion ex = (Instantiate(explosionPrefab.gameObject, transform.position, transform.rotation) as GameObject).GetComponent<Explosion>();
+            ex.size = explosion;
+            ex.damage = damage;
+            ex.knockback = knockback;
         }
     }
 

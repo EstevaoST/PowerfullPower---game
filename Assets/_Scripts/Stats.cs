@@ -8,7 +8,7 @@ public class Stats {
     public struct StatsEntry
     {
         public StatsName name;
-        public float value;
+        public int value;
     }
     public enum StatsName
     {
@@ -23,34 +23,42 @@ public class Stats {
         recoil
     }
 
-
-    public float speed; // V
-    public float size; // S
-    public float gravity; // G
+    // levels
+    public int speed; // V
+    public int size; // S
+    public int gravity; // G
     public int damage; // D
-    public float knockback; // K
-    public float cooldown; // C
+    public int knockback; // K
+    public int cooldown; // C
     public int rebound; // R
-    public float explosion; // B
-    public float recoil; //
+    public int explosion; // B
+    public int recoil; //
 
-
-    public void SetStat(StatsName s, float value)
+    public float Speed          { get { return GetStatValue(StatsName.speed); } }
+    public float Size           { get { return GetStatValue(StatsName.size); } }
+    public float Gravity        { get { return GetStatValue(StatsName.gravity); } }
+    public float Damage         { get { return GetStatValue(StatsName.damage); } }
+    public float Knockback      { get { return GetStatValue(StatsName.knockback); } }
+    public float Cooldown       { get { return GetStatValue(StatsName.cooldown); } }
+    public float Rebound        { get { return GetStatValue(StatsName.rebound); } }
+    public float Explosion      { get { return GetStatValue(StatsName.explosion); } }
+    public float Recoil         { get { return GetStatValue(StatsName.recoil); } }
+    public void SetStatLevel(StatsName s, int value)
     {
         switch (s)
         {
             case StatsName.speed: speed = value; break;
             case StatsName.size: size = value; break;
             case StatsName.gravity: gravity = value; break;
-            case StatsName.damage: damage = (int)value; break;
+            case StatsName.damage: damage = value; break;
             case StatsName.knockback: knockback = value; break;
             case StatsName.cooldown: cooldown = value; break;
-            case StatsName.rebound: rebound = (int)value; break;
+            case StatsName.rebound: rebound = value; break;
             case StatsName.explosion: explosion = value; break;
             case StatsName.recoil: recoil = value; break;
         }
     }
-    public float GetStat(StatsName s)
+    public int GetStatLevel(StatsName s)
     {
         switch (s)
         {
@@ -63,6 +71,22 @@ public class Stats {
             case StatsName.rebound: return rebound;
             case StatsName.explosion: return explosion;
             case StatsName.recoil: return recoil;
+        }
+        return 0;
+    }
+    public float GetStatValue(StatsName s)
+    {
+        switch (s)
+        {
+            case StatsName.speed: return 50 * speed;
+            case StatsName.size: return 0.25f * size;
+            case StatsName.gravity: return 10 * (gravity-1);
+            case StatsName.damage: return 1 + 3 * damage;
+            case StatsName.knockback: return 100 * knockback;
+            case StatsName.cooldown: return Mathf.Lerp(2, 0.1f, cooldown/ 10.0f);
+            case StatsName.rebound: return rebound - 1;
+            case StatsName.explosion: return 3.1f * (explosion-1);
+            case StatsName.recoil: return 100 * recoil;
         }
         return 0;
     }
@@ -82,25 +106,8 @@ public class Stats {
         }
         return '?';
     }
-    public static float GetStatValue(StatsName s, int level)
-    {
-        switch (s)
-        {
-            case StatsName.speed: return 100 * level;
-            case StatsName.size: return 5 + 2 * level;
-            case StatsName.gravity: return 0.3f * level;
-            case StatsName.damage: return 1 + 3 * level;
-            case StatsName.knockback: return 100 * level;
-            case StatsName.cooldown: return Mathf.Lerp(2, 0.1f, level / 10.0f);
-            case StatsName.rebound: return level - 1;
-            case StatsName.explosion: return 10 * level;
-            case StatsName.recoil: return 100 * level; // what ???
-        }
-        return 0;
-    }
-
     internal void Add(StatsEntry item)
     {
-        SetStat(item.name, GetStat(item.name) + item.value);
+        SetStatLevel(item.name, GetStatLevel(item.name) + item.value);
     }
 }

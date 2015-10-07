@@ -7,7 +7,7 @@ public class MutableShooter : MonoBehaviour
     public Stats stats;
 
     public float currentCooldown;
-    public GameObject explosionPrefab;
+    public Explosion explosionPrefab;
     public Animation weaponAnimator;
     public Shot shotPrefab;
     public Transform shotPlace;
@@ -24,24 +24,25 @@ public class MutableShooter : MonoBehaviour
         if (currentCooldown >= 0)
             return;
 
-        currentCooldown = stats.cooldown;
-        rb.AddForce(-transform.forward * stats.recoil);
+        currentCooldown = stats.Cooldown;
+        rb.AddForce(-transform.forward * stats.Recoil);
 
-        Shot s = (Instantiate(shotPrefab.gameObject, shotPlace.position + shotPlace.forward * shotPrefab.transform.localScale.z, shotPlace.rotation) as GameObject).GetComponent<Shot>();
-        s.transform.localScale *= stats.size;
+        Shot s = (Instantiate(shotPrefab.gameObject, shotPlace.position + shotPlace.forward * stats.Size / 20, shotPlace.rotation) as GameObject).GetComponent<Shot>();
+        s.transform.localScale *= stats.Size;
+        s.explosionPrefab = explosionPrefab;
         Physics.IgnoreCollision(s.GetComponent<Collider>(), GetComponent<Collider>());
 
-        s.speed = stats.speed;
-        s.gravity = stats.gravity;
-        s.damage = stats.damage;
-        s.knockback = stats.knockback;
-        s.rebound = stats.rebound;
-        s.explosion = stats.explosion;
+        s.speed = stats.Speed;
+        s.gravity = stats.Gravity;
+        s.damage = (int)stats.Damage;
+        s.knockback = stats.Knockback;
+        s.rebound = (int)stats.Rebound;
+        s.explosion = stats.Explosion;
 
         weaponAnimator.Play("Shoot");
         
         AnimationState anim = weaponAnimator.PlayQueued("Reload", QueueMode.CompleteOthers);
-        anim.speed = anim.length / stats.cooldown;
+        anim.speed = anim.length / stats.Cooldown;
 	}
 
     void FixedUpdate()

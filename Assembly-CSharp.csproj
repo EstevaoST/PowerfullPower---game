@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\_Scripts\Explosion.cs" />
      <Compile Include="Assets\_Scripts\GameCharacter.cs" />
      <Compile Include="Assets\_Scripts\MutableShooter.cs" />
      <Compile Include="Assets\_Scripts\Powerup\PowerUp.cs" />
