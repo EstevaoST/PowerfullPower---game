@@ -43,6 +43,9 @@ public class MutableShooter : MonoBehaviour
         
         AnimationState anim = weaponAnimator.PlayQueued("Reload", QueueMode.CompleteOthers);
         anim.speed = anim.length / stats.Cooldown;
+
+        transform.Rotate(Vector3.right * Random.Range(0.0f, 1.0f) + Vector3.up * Random.Range(0.0f, 1.0f), stats.Recoil * 0.002f,
+            Space.Self);
 	}
 
     void FixedUpdate()

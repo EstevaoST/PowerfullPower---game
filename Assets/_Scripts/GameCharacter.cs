@@ -27,7 +27,7 @@ public class GameCharacter : MonoBehaviour {
     public void TakeDamage(int damage, Vector3 knockback)
     {
         life -= damage;
-        Debug.Log("Ouch " + damage);
+        Debug.Log("Ouch " + knockback);
         if (life <= 0)
             Debug.Log(name + ": I'm dead");
         rb.AddForce(knockback);

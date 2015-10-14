@@ -17,15 +17,14 @@ public class Shot : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = transform.forward * speed;
+        rb.velocity = transform.forward * speed + Vector3.down * gravity * Time.fixedDeltaTime;
     }
     void FixedUpdate()
     {
         if (rb.velocity.magnitude < 0.01f * speed)
             Destroy(gameObject);
 
-        Vector3 dir = Vector3.down * gravity;
-        rb.velocity +=  dir * Time.fixedDeltaTime;
+        rb.velocity +=  Vector3.down * gravity * Time.fixedDeltaTime;
 
         transform.LookAt(transform.position + rb.velocity, transform.up);
 

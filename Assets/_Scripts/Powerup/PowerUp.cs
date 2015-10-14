@@ -105,9 +105,6 @@ public class PowerUp : MonoBehaviour {
         TextMesh[] tms = GetComponentsInChildren<TextMesh>();
         foreach (var item in tms)
             item.gameObject.SetActive(false);
-
-        Array enumstats = Enum.GetValues(typeof(Stats.StatsName));
-        Stats.StatsName choosen = Stats.StatsName.cooldown; // dane-se o valor inicial
         
         // get greater value
         Stats.StatsEntry bgstentry = new Stats.StatsEntry() { name = Stats.StatsName.cooldown, value = 0 };
