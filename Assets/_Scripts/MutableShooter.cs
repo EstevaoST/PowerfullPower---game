@@ -12,11 +12,11 @@ public class MutableShooter : MonoBehaviour
     public Shot shotPrefab;
     public Transform shotPlace;
 
-    private Rigidbody rb;
+    private RigidBodyCharacter rbc;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rbc = GetComponent<RigidBodyCharacter>();
     }
 
 	public void Shoot()
@@ -25,7 +25,6 @@ public class MutableShooter : MonoBehaviour
             return;
 
         currentCooldown = stats.Cooldown;
-        rb.AddForce(-transform.forward * stats.Recoil);
 
         Shot s = (Instantiate(shotPrefab.gameObject, shotPlace.position + shotPlace.forward * stats.Size / 20, shotPlace.rotation) as GameObject).GetComponent<Shot>();
         s.transform.localScale *= stats.Size;
@@ -44,8 +43,9 @@ public class MutableShooter : MonoBehaviour
         AnimationState anim = weaponAnimator.PlayQueued("Reload", QueueMode.CompleteOthers);
         anim.speed = anim.length / stats.Cooldown;
 
-        transform.Rotate(Vector3.right * Random.Range(0.0f, 1.0f) + Vector3.up * Random.Range(0.0f, 1.0f), stats.Recoil * 0.002f,
-            Space.Self);
+        rbc.rb.AddForce(-transform.forward * stats.Recoil);
+        rbc.transform.Rotate(Vector3.up * Random.Range(-0.5f, 0.5f) * Mathf.Sqrt(Mathf.Sqrt(stats.Recoil)), Space.Self);
+        rbc.head.Rotate(-Vector3.right * Random.Range(0.0f, 1.0f) * Mathf.Sqrt(Mathf.Sqrt(stats.Recoil)), Space.Self);
 	}
 
     void FixedUpdate()

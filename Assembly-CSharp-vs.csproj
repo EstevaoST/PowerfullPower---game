@@ -48,8 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\_Scripts\Explosion.cs" />
      <Compile Include="Assets\_Scripts\GameCharacter.cs" />
+     <Compile Include="Assets\_Scripts\GameManager.cs" />
      <Compile Include="Assets\_Scripts\MutableShooter.cs" />
+     <Compile Include="Assets\_Scripts\PlayerInput.cs" />
      <Compile Include="Assets\_Scripts\Powerup\PowerUp.cs" />
+     <Compile Include="Assets\_Scripts\RigidBodyCharacter.cs" />
      <Compile Include="Assets\_Scripts\Shot.cs" />
      <Compile Include="Assets\_Scripts\Stats.cs" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />

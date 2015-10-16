@@ -82,11 +82,11 @@ public class Stats {
             case StatsName.size: return 0.25f * size;
             case StatsName.gravity: return (gravity-1) * gravity * GetStatValue(StatsName.speed) * 0.1f;
             case StatsName.damage: return 1 + 3 * damage;
-            case StatsName.knockback: return 10000 * recoil * recoil * GetStatValue(StatsName.cooldown);
+            case StatsName.knockback: return 1000 * recoil * recoil;
             case StatsName.cooldown: return Mathf.Pow(Mathf.Lerp(1.5f, 0.4f, cooldown/ 10.0f),2);
             case StatsName.rebound: return rebound - 1;
             case StatsName.explosion: return 3.1f * (explosion-1);
-            case StatsName.recoil: return 1000 * recoil * recoil * GetStatValue(StatsName.cooldown);
+            case StatsName.recoil: return 1000 * recoil * recoil;
         }
         return 0;
     }
